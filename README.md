@@ -1,4 +1,12 @@
-# Randomizer Keywords
+# Randomizer Keywords (deadbranch-forks)
+
+> **Fork notice**  
+> This repository is a fork of  
+> <https://github.com/mikf/sd-webui-randomizer-keywords>.  
+> Its primary purpose is to add **scheduler keyword support** so you can
+> switch the diffusion scheduler directly from the prompt. All other
+> behaviour tracks the upstream extension unless stated otherwise.
+ 
 This extension for stable-diffusion-webui adds some keywords using the extra networks syntax to allow randomization of parameters when combined with the [Dynamic Prompts](https://github.com/adieyal/sd-dynamic-prompts/tree/main/sd_dynamic_prompts) extension.
 
 ## Example
@@ -29,6 +37,7 @@ This extension adds the following special keywords to be used in prompts:
 - `<subseed:1>` - Subseed
 - `<subseed_strength:1>` - Subseed Strength
 - `<sampler_name:Euler a>` - Sampler Name
+- `<scheduler:EulerDiscreteScheduler>` - Scheduler
 - `<steps:20>` - Sampling Steps
 - `<width:512>` - Width
 - `<height:512>` - Height
