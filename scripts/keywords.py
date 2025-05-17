@@ -1,7 +1,6 @@
 import re
 import sys
-from modules import scripts, script_callbacks, ui_extra_networks, extra_networks, shared, sd_models, sd_vae, sd_samplers, processing
-
+from modules import scripts, script_callbacks, ui_extra_networks, extra_networks, shared, sd_models, sd_vae, sd_samplers, sd_schedulers, processing
 
 operations = {
     "txt2img": processing.StableDiffusionProcessingTxt2Img,
@@ -161,6 +160,15 @@ def validate_sampler_name(x, p):
         return f"Invalid sampler '{x}'"
     return None
 
+
+# --------------------------------------------------------------------------- #
+# Scheduler keyword support
+# --------------------------------------------------------------------------- #
+
+def validate_scheduler_name(x, p):
+    if not sd_schedulers.is_valid_scheduler(x):
+        return f"Invalid scheduler '{x}'"
+    return None
 
 class RandomizerKeywordCheckpoint(extra_networks.ExtraNetwork):
     def __init__(self):
@@ -360,6 +368,8 @@ sampler_params = [
     RandomizerKeywordSamplerParam("eta", float, 0),
     RandomizerKeywordSamplerParam("ddim_discretize", str),
     RandomizerKeywordSamplerParam("denoising_strength", float),
+    # Scheduler selection (maps directly onto ``p.scheduler`` used by samplers)
+    RandomizerKeywordSamplerParam("scheduler", str, validate_cb=validate_scheduler_name),
 
     # txt2img
     RandomizerKeywordSamplerParam("hr_scale", float, 1, op_type="txt2img"),
